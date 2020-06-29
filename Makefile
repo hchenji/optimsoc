@@ -31,7 +31,7 @@ OBJDIR := objdir
 BUILD_EXAMPLES := yes
 # Include FPGA bitstreams in the examples (yes/no)
 # Requires Xilinx Vivado to be installed
-BUILD_EXAMPLES_FPGA := yes
+BUILD_EXAMPLES_FPGA := no
 # Build documentation (yes/no)
 BUILD_DOCS := yes
 

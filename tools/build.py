@@ -547,6 +547,34 @@ def build_examples_sim(options, env):
           "build/optimsoc_examples_system_2x2_cccc_sim_0/bld-verilator/Vtb_system_2x2_cccc",
         ],
         "options": "--NUM_CORES 2 --USE_DEBUG 1"},
+
+      { "name": "system_3x3_c9_sim",
+        "outname": "system_3x3_c9_sim_dualcore",
+        "path": "system_3x3_c9",
+        "artifact": [
+          "build/optimsoc_examples_system_3x3_c9_sim_0/sim-verilator/Vtb_system_3x3_c9",
+          "build/optimsoc_examples_system_3x3_c9_sim_0/bld-verilator/Vtb_system_3x3_c9",
+        ],
+        "options": "--NUM_CORES 2"},
+
+      { "name": "system_3x3_c9_sim",
+        "outname": "system_3x3_c9_sim_dualcore_debug",
+        "path": "system_3x3_c9",
+        "artifact": [
+          "build/optimsoc_examples_system_3x3_c9_sim_0/sim-verilator/Vtb_system_3x3_c9",
+          "build/optimsoc_examples_system_3x3_c9_sim_0/bld-verilator/Vtb_system_3x3_c9",
+        ],
+        "options": "--NUM_CORES 2  --USE_DEBUG 1"},
+
+        
+      { "name": "system_3x3_c9_sim",
+        "outname": "system_3x3_c9_sim_singlecore_debug",
+        "path": "system_3x3_c9",
+        "artifact": [
+          "build/optimsoc_examples_system_3x3_c9_sim_0/sim-verilator/Vtb_system_3x3_c9",
+          "build/optimsoc_examples_system_3x3_c9_sim_0/bld-verilator/Vtb_system_3x3_c9",
+        ],
+        "options": "--NUM_CORES 1  --USE_DEBUG 1"},
     ]
 
     for ex in examples:
