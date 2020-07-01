@@ -33,7 +33,7 @@ BUILD_EXAMPLES := yes
 # Requires Xilinx Vivado to be installed
 BUILD_EXAMPLES_FPGA := no
 # Build documentation (yes/no)
-BUILD_DOCS := yes
+BUILD_DOCS := no
 
 # Only for |make install|: use either INSTALL_PREFIX /or/ INSTALL_TARGET to
 # choose an installation destination. In most cases use INSTALL_PREFIX.

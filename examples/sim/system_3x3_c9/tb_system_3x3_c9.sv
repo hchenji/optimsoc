@@ -57,7 +57,7 @@ module tb_system_3x3_c9(
    localparam base_config_t
      BASE_CONFIG = '{ NUMTILES: 9,
                       NUMCTS: 9,	// TODO: what is CTS??
-                      CTLIST: {{60{16'hx}}, 16'h0, 16'h1, 16'h2, 16'h3},
+                      CTLIST: {{60{16'hx}}, 16'h0, 16'h1, 16'h2, 16'h3, 16'h4, 16'h5, 16'h6, 16'h7, 16'h8},
                       CORES_PER_TILE: NUM_CORES,
                       GMEM_SIZE: 0,
                       GMEM_TILE: 'x,

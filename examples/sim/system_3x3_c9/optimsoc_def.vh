@@ -28,7 +28,7 @@
 
 // Number of virtual channels
 //	TODO: why is this 3?
-`define VCHANNELS 3
+`define VCHANNELS 8
 
 // Assign virtual channels to services
 `define VCHANNEL_LSU_REQ   'x

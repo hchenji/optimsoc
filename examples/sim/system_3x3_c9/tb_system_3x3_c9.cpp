@@ -18,11 +18,24 @@ int main(int argc, char *argv[])
     VerilatedControl &simctrl = VerilatedControl::instance();
     simctrl.init(ct, argc, argv);
 
-    for (int var = 0; var < 9; ++var) {
-    	char str[256];
-    	sprintf(str, "TOP.tb_system_3x3_c9.u_system.gen_ct[%d].u_ct.gen_sram.u_ram.sp_ram.gen_sram_sp_impl.u_impl", var);
-    	simctrl.addMemory(str);
-	}
+    // char str[9][256];
+
+ //    for (int var = 0; var < 9; ++var) {
+ //    	sprintf(str[var], "TOP.tb_system_3x3_c9.u_system.gen_ct[%d].u_ct.gen_sram.u_ram.sp_ram.gen_sram_sp_impl.u_impl", var);
+ //    	simctrl.addMemory(str[var]);
+	// }
+
+
+    simctrl.addMemory("TOP.tb_system_3x3_c9.u_system.gen_ct[0].u_ct.gen_sram.u_ram.sp_ram.gen_sram_sp_impl.u_impl");
+    simctrl.addMemory("TOP.tb_system_3x3_c9.u_system.gen_ct[1].u_ct.gen_sram.u_ram.sp_ram.gen_sram_sp_impl.u_impl");
+    simctrl.addMemory("TOP.tb_system_3x3_c9.u_system.gen_ct[2].u_ct.gen_sram.u_ram.sp_ram.gen_sram_sp_impl.u_impl");
+    simctrl.addMemory("TOP.tb_system_3x3_c9.u_system.gen_ct[3].u_ct.gen_sram.u_ram.sp_ram.gen_sram_sp_impl.u_impl");
+    simctrl.addMemory("TOP.tb_system_3x3_c9.u_system.gen_ct[4].u_ct.gen_sram.u_ram.sp_ram.gen_sram_sp_impl.u_impl");
+    simctrl.addMemory("TOP.tb_system_3x3_c9.u_system.gen_ct[5].u_ct.gen_sram.u_ram.sp_ram.gen_sram_sp_impl.u_impl");
+    simctrl.addMemory("TOP.tb_system_3x3_c9.u_system.gen_ct[6].u_ct.gen_sram.u_ram.sp_ram.gen_sram_sp_impl.u_impl");
+    simctrl.addMemory("TOP.tb_system_3x3_c9.u_system.gen_ct[7].u_ct.gen_sram.u_ram.sp_ram.gen_sram_sp_impl.u_impl");
+    simctrl.addMemory("TOP.tb_system_3x3_c9.u_system.gen_ct[8].u_ct.gen_sram.u_ram.sp_ram.gen_sram_sp_impl.u_impl");
+
     simctrl.setMemoryFuncs(do_readmemh, do_readmemh_file);
     simctrl.run();
 
