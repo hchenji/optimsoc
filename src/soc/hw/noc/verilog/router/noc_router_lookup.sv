@@ -37,7 +37,10 @@ module noc_router_lookup
     parameter DEST_WIDTH = 5,
     parameter DESTS = 1,
     parameter OUTPUTS = 1,
-    parameter [DESTS*OUTPUTS-1:0] ROUTES = {DESTS*OUTPUTS{1'b0}}
+    parameter [DESTS*OUTPUTS-1:0] ROUTES = {DESTS*OUTPUTS{1'b0}},
+    parameter XCOORD = 'x,
+    parameter YCOORD = 'x,
+    parameter NODENUM = 'x
     )
    (
     input                   clk,
@@ -62,10 +65,12 @@ module noc_router_lookup
    logic                    wormhole;
    assign wormhole = |worm;
 
-   // Extract destination from flit
+   // Extract destination & source (undocumented) from flit. assume src width = dest width (5 bits default)
    logic [DEST_WIDTH-1:0]   dest;
+   logic [DEST_WIDTH-1:0]   src;
    assign dest = in_flit[FLIT_WIDTH-1 -: DEST_WIDTH];
-
+   assign src = in_flit[FLIT_WIDTH-9 -: DEST_WIDTH];
+  
    // This is the selection signal of the slave, one hot so that it
    // directly serves as flow control valid
    logic [OUTPUTS-1:0]      valid;
@@ -87,6 +92,8 @@ module noc_router_lookup
          if (in_valid) begin
             // This is a header. Lookup output
             valid = ROUTES[dest*OUTPUTS +: OUTPUTS];
+            $display("[%t, %0d] x is %02d y is %02d dest is %02d src is %02d valid is %02d", $time, NODENUM, XCOORD, YCOORD, dest, src, valid);
+            
             if (in_ready & !in_last) begin
                // If we can push it further and it is not the only
                // flit, enter a worm and store the output

@@ -76,7 +76,7 @@ module noc_mesh
    // the number of flits (and last) between the routers.
    localparam PCHANNELS = ENABLE_VCHANNELS ? 1 : CHANNELS;
 
-   genvar                                           c, p, x, y;
+   genvar c, p, x, y;
 
    generate
       // With virtual channels, we generate one router per node and
@@ -87,6 +87,7 @@ module noc_mesh
       // Arrays of wires between the routers. Each router has a
       // pair of NoC wires per direction and below those are hooked
       // up.
+      //	first parameter is 5 because of 5 directions N E W S and local
       wire [4:0][PCHANNELS-1:0][FLIT_WIDTH-1:0]     node_in_flit [0:NODES-1];
       wire [4:0][PCHANNELS-1:0]                     node_in_last [0:NODES-1];
       wire [4:0][CHANNELS-1:0]                      node_in_valid [0:NODES-1];
@@ -134,7 +135,11 @@ module noc_mesh
                    .BUFFER_SIZE_IN (BUFFER_SIZE_IN),
                    .BUFFER_SIZE_OUT (BUFFER_SIZE_OUT),
                    .DESTS      (NODES),
-                   .ROUTES     (genroutes(x,y)))
+                   .ROUTES     (genroutes(x,y)),
+                 .XCOORD     (x),
+                 .YCOORD     (y),
+                 .NODENUM    (nodenum(x,y))
+                   )
                u_router
                  (.*,
                   .in_flit   (node_in_flit[nodenum(x,y)]),
@@ -191,7 +196,11 @@ module noc_mesh
                           .INPUTS     (5),
                           .OUTPUTS    (5),
                           .DESTS      (NODES),
-                          .ROUTES     (genroutes(x,y)))
+                          .ROUTES     (genroutes(x,y)),
+                          .XCOORD     (x),
+                          .YCOORD     (y),
+                          .NODENUM    (nodenum(x,y))
+                          )
                   u_router
                         (.*,
                          .in_flit   (phys_in_flit),

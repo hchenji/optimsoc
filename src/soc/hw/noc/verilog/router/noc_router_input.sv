@@ -33,8 +33,11 @@ module noc_router_input
     parameter DESTS = 1,
     parameter OUTPUTS = 1,
     parameter [OUTPUTS*DESTS-1:0] ROUTES = {DESTS*OUTPUTS{1'b0}},
-    parameter BUFFER_DEPTH = 4
-    )
+    parameter BUFFER_DEPTH = 4,
+    parameter XCOORD = 'x,
+    parameter YCOORD = 'x,
+    parameter NODENUM = 'x
+   )
    (
     input                                  clk,
     input                                  rst,
@@ -75,7 +78,11 @@ module noc_router_input
 
          noc_router_lookup
            #(.FLIT_WIDTH (FLIT_WIDTH), .DESTS (DESTS),
-             .OUTPUTS (OUTPUTS), .ROUTES (ROUTES))
+             .OUTPUTS (OUTPUTS), .ROUTES (ROUTES),
+			 .XCOORD     (XCOORD),
+			 .YCOORD     (YCOORD),
+			 .NODENUM    (NODENUM)
+            )
          u_lookup
            (.*,
             .in_flit   (buffer_flit),

@@ -1,0 +1,4 @@
+
+Networkadapter_ct has 2 modes of receiving packets: DMA and mpsimple (dedicated hardware buffer). mpsimple generates interrupt irq 3 when a message is received, which is then read into a buffer.
+
+endpoints are purely a software construct. you can register endpoints with a tile,node,port tuple. different cores on the same tile can use different node or port nums. so, it is possible to talk to a particular core either by choosing an endpoint, or using a different class. 
