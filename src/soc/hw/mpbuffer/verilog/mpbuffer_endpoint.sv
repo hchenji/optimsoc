@@ -383,13 +383,13 @@ module mpbuffer_endpoint
       ingress_valid = noc_in_valid;
       ingress_last = noc_in_last;
       if ((noc_in_valid & !control_pending) &&
-          (noc_in_flit[26:24] == 3'b111) &&
+          (noc_in_flit[21:19] == 3'b111) &&
           !noc_in_flit[0]) begin
          nxt_control_pending = 1'b1;
-         nxt_control_flit[31:27] = noc_in_flit[23:19];
-         nxt_control_flit[26:24] = 3'b111;
-         nxt_control_flit[23:19] = noc_in_flit[31:27];
-         nxt_control_flit[18:2] = noc_in_flit[18:2];
+         nxt_control_flit[31:22] = noc_in_flit[18:9];
+         nxt_control_flit[21:19] = 3'b111;
+         nxt_control_flit[18:9] = noc_in_flit[31:22];
+         nxt_control_flit[8:2] = noc_in_flit[8:2];
          nxt_control_flit[1] = enabled;
          nxt_control_flit[0] = 1'b1;
          ingress_valid = 1'b0;

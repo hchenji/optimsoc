@@ -45,13 +45,28 @@
 #define OPTIMSOC_NA_CONF_MPSIMPLE 0x1
 #define OPTIMSOC_NA_CONF_DMA      0x2
 
+// has been changed to accomodate 10 bit src/dest IDs
+// MAKE SURE THIS IS CONSISTENT WITH src/soc/hw/util/optimsoc_constants.sv
+// and with lisnoc files in external/. see lisnoc_dma_def.vh
+// and with mpbuffer in src/hw. class 3'b111 is used to implement ctready() function
+// and check all places where src/dst is extracted - correct bitmask for 10 bits is 0x3ff
+// IMPORTANT: only mpsimple is used for now, so only mpbuffer.core needs to be modded. not dma in lisnoc
+
+// #define OPTIMSOC_DEST_MSB 31
+// #define OPTIMSOC_DEST_LSB 27
+// #define OPTIMSOC_CLASS_MSB 26
+// #define OPTIMSOC_CLASS_LSB 24
+// #define OPTIMSOC_CLASS_NUM 8
+// #define OPTIMSOC_SRC_MSB 23
+// #define OPTIMSOC_SRC_LSB 19
+
 #define OPTIMSOC_DEST_MSB 31
-#define OPTIMSOC_DEST_LSB 27
-#define OPTIMSOC_CLASS_MSB 26
-#define OPTIMSOC_CLASS_LSB 24
+#define OPTIMSOC_DEST_LSB 22
+#define OPTIMSOC_CLASS_MSB 21
+#define OPTIMSOC_CLASS_LSB 19
 #define OPTIMSOC_CLASS_NUM 8
-#define OPTIMSOC_SRC_MSB 23
-#define OPTIMSOC_SRC_LSB 19
+#define OPTIMSOC_SRC_MSB 18
+#define OPTIMSOC_SRC_LSB 9
 
 #include <assert.h>
 #include <stdint.h>

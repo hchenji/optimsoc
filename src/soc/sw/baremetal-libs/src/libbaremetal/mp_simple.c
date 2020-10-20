@@ -130,7 +130,9 @@ int optimsoc_mp_simple_ctready(uint32_t rank, uint16_t endpoint) {
     req = SET(req, OPTIMSOC_CLASS_NUM-1, OPTIMSOC_CLASS_MSB,
               OPTIMSOC_CLASS_LSB);
     req = SET(req, optimsoc_get_tileid(), OPTIMSOC_SRC_MSB, OPTIMSOC_SRC_LSB);
-    req = SET(req, endpoint & 0xff, 9, 2);
+
+    //  mystery - for class 7, 
+    req = SET(req, endpoint & 0xff, 8, 2);
 
     SEND(endpoint) = 1;
     SEND(endpoint) = req;
@@ -174,14 +176,16 @@ void _irq_handler(void* arg) {
             // Extract class
             uint8_t class = EXTRACT(header, OPTIMSOC_CLASS_MSB, OPTIMSOC_CLASS_LSB);
 
+            // TODO figure out mysterious class 7 = 3'b111
             if (class == OPTIMSOC_CLASS_NUM-1) {
+                printf("in irq handler for mystery class\n");
                 uint32_t ready = (header & 0x2) >> 1;
                 if (ready) {
                     uint32_t tile, domain;
                     uint8_t endpoint;
                     tile = EXTRACT(header, OPTIMSOC_SRC_MSB, OPTIMSOC_SRC_LSB);
                     domain = optimsoc_get_tilerank(tile);
-                    endpoint = EXTRACT(header, 9, 2);
+                    endpoint = EXTRACT(header, 8, 2);
                     _domains_ready[domain] |= 1 << endpoint;
                 }
             }
@@ -193,7 +197,8 @@ void _irq_handler(void* arg) {
                 continue;
             }
 
-            uint32_t src = (_buffer[0]>>OPTIMSOC_SRC_LSB) & 0x1f;
+            //  src is not 5 bits anymore...0x1f becomes 0x3ff
+            uint32_t src = (_buffer[0]>>OPTIMSOC_SRC_LSB) & 0x3ff;
             trace_mp_simple_recv(src, class, size);
 
             cls_handlers[class](_buffer,size);

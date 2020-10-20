@@ -34,7 +34,7 @@
 
 module noc_router_lookup
   #(parameter FLIT_WIDTH = 32,
-    parameter DEST_WIDTH = 5,
+    parameter DEST_WIDTH = 10, // changed to 10 bits
     parameter DESTS = 1,
     parameter OUTPUTS = 1,
     parameter [DESTS*OUTPUTS-1:0] ROUTES = {DESTS*OUTPUTS{1'b0}},
@@ -68,8 +68,13 @@ module noc_router_lookup
    // Extract destination & source (undocumented) from flit. assume src width = dest width (5 bits default)
    logic [DEST_WIDTH-1:0]   dest;
    logic [DEST_WIDTH-1:0]   src;
+   logic [3:0]   msg_type;
+   logic [2:0]   cls_type;
+   
    assign dest = in_flit[FLIT_WIDTH-1 -: DEST_WIDTH];
-   assign src = in_flit[FLIT_WIDTH-9 -: DEST_WIDTH];
+   assign src = in_flit[FLIT_WIDTH-14 -: DEST_WIDTH];
+   assign msg_type = in_flit[8 : 5];
+   assign cls_type = in_flit[21 : 19];
   
    // This is the selection signal of the slave, one hot so that it
    // directly serves as flow control valid
@@ -92,7 +97,7 @@ module noc_router_lookup
          if (in_valid) begin
             // This is a header. Lookup output
             valid = ROUTES[dest*OUTPUTS +: OUTPUTS];
-            $display("[%t, %0d] x is %02d y is %02d dest is %02d src is %02d valid is %02d", $time, NODENUM, XCOORD, YCOORD, dest, src, valid);
+            $display("[%t, %0d] x is %02d y is %02d dest is %02d src is %02d mtype is %02d cls is %02d valid is %02d msg is %x", $time, NODENUM, XCOORD, YCOORD, dest, src, msg_type, cls_type, valid, in_flit);
             
             if (in_ready & !in_last) begin
                // If we can push it further and it is not the only

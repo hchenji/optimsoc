@@ -30,21 +30,29 @@ package optimsoc_constants;
    // Maximum packet length
    localparam NOC_MAX_LEN = 32;
 
+//#define OPTIMSOC_DEST_MSB 31
+//#define OPTIMSOC_DEST_LSB 22
+//#define OPTIMSOC_CLASS_MSB 21
+//#define OPTIMSOC_CLASS_LSB 19
+//#define OPTIMSOC_CLASS_NUM 8
+//#define OPTIMSOC_SRC_MSB 18
+//#define OPTIMSOC_SRC_LSB 9
+
    // NoC packet header
    // Mandatory fields
    localparam NOC_DEST_MSB = 31;
-   localparam NOC_DEST_LSB = 27;
-   localparam NOC_CLASS_MSB = 26;
-   localparam NOC_CLASS_LSB = 24;
-   localparam NOC_SRC_MSB = 23;
-   localparam NOC_SRC_LSB = 19;
+   localparam NOC_DEST_LSB = 22;
+   localparam NOC_CLASS_MSB = 21;
+   localparam NOC_CLASS_LSB = 19;
+   localparam NOC_SRC_MSB = 18;
+   localparam NOC_SRC_LSB = 9;
 
    // Classes
    localparam NOC_CLASS_LSU = 3'h2;
 
    // NoC LSU
-   localparam NOC_LSU_MSGTYPE_MSB = 18;
-   localparam NOC_LSU_MSGTYPE_LSB = 16;
+   localparam NOC_LSU_MSGTYPE_MSB = 8;
+   localparam NOC_LSU_MSGTYPE_LSB = 5;
    localparam NOC_LSU_MSGTYPE_READREQ = 3'h0;
    localparam NOC_LSU_SIZE_IDX = 15;
    localparam NOC_LSU_SIZE_SINGLE = 0;
