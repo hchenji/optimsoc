@@ -48,6 +48,27 @@ case "$ID" in
 
     $SUDO_CMD apt-get -y install $PKGLIST
     ;;
+
+  debian)
+    PKGLIST="curl git build-essential autoconf automake \
+      libtool pkg-config tcl libusb-1.0-0-dev libboost-dev python \
+      python3 python3-pip python3-venv libffi-dev python3-packaging \
+      python3-yaml"
+    if [ "$INSTALL_DOC_DEPS" == "yes" ]; then
+      PKGLIST="$PKGLIST doxygen latexmk texlive texlive-latex-extra \
+        texlive-fonts-extra"
+    fi
+    if [ "$INSTALL_BUILDROOT_DEPS" == "yes" ]; then
+      # All required dependencies + ncurses5 for "make menuconfig"
+      # https://buildroot.org/downloads/manual/manual.html#requirement
+      PKGLIST="$PKGLIST sed make binutils build-essential gcc g++ bash \
+        patch gzip bzip2 perl tar cpio python unzip rsync file bc wget \
+        libncurses5-dev"
+    fi
+
+    $SUDO_CMD apt-get -y install $PKGLIST
+    ;;
+
   *)
     echo Unknown distribution "$ID". Please extend this script!
     exit 1

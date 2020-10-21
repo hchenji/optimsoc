@@ -139,11 +139,11 @@ module networkadapter_conf
  `endif
 `endif
 
-   wire [15:0]              ctlist_vector[0:63];
+   wire [15:0]              ctlist_vector[0:127];
 
    genvar                   i;
    generate
-      for (i = 0; i < 64; i = i + 1) begin : gen_ctlist_vector // array is indexed by the desired destination
+      for (i = 0; i < 128; i = i + 1) begin : gen_ctlist_vector // array is indexed by the desired destination
          if (i < CONFIG.NUMCTS) begin
             // The entries of the ctlist_vector array are subranges from the parameter, where
             // the indexing is reversed (num_dests-i-1)!

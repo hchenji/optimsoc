@@ -31,6 +31,25 @@ case "$ID" in
     $SUDO_CMD pip3 install pytest
     ;;
 
+  debian)
+    # Ubuntu seems to have a rather strange and inconsistent naming for the
+    # ZeroMQ packages ...
+    $SUDO_CMD apt-get install -y \
+      check \
+      doxygen \
+      python3 python3-venv python3-pip \
+      tox \
+      lcov valgrind \
+      libzmq5 \
+      libzmq3-dev \
+      libzmq5-dbg \
+      libczmq-dev \
+      libczmq-dbg \
+      xsltproc \
+      libelf1 libelf-dev zlib1g zlib1g-dev
+    $SUDO_CMD pip3 install pytest
+    ;;
+
   *suse*)
     $SUDO_CMD zypper install \
       libcheck0 check-devel libcheck0-debuginfo \
