@@ -178,7 +178,6 @@ void _irq_handler(void* arg) {
 
             // TODO figure out mysterious class 7 = 3'b111
             if (class == OPTIMSOC_CLASS_NUM-1) {
-                printf("in irq handler for mystery class\n");
                 uint32_t ready = (header & 0x2) >> 1;
                 if (ready) {
                     uint32_t tile, domain;

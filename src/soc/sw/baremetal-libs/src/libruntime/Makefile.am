@@ -69,29 +69,29 @@ CLEANFILES = share/optimsoc-baremetal-runtime.pc
 if OR1KOBJDUMPSET
 MYOR1KOBJDUMP = $(OR1KOBJDUMP)
 else
-# MYOR1KOBJDUMP = $(subst gcc,objdump,$(wordlist 1,1,$(CC)))
-MYOR1KOBJDUMP = or1k-elf-objdump
+MYOR1KOBJDUMP = $(subst gcc,objdump,$(wordlist 1,1,$(CC)))
+# MYOR1KOBJDUMP = or1k-elf-objdump
 endif
 
 if OR1KOBJCOPYSET
 MYOR1KOBJCOPY = $(OR1KOBJCOPY)
 else
-# MYOR1KOBJCOPY = $(subst gcc,objcopy,$(wordlist 1,1,$(CC)))
-MYOR1KOBJCOPY = or1k-elf-objcopy
+MYOR1KOBJCOPY = $(subst gcc,objcopy,$(wordlist 1,1,$(CC)))
+# MYOR1KOBJCOPY = or1k-elf-objcopy
 endif
 
-MYOR1KCC = or1k-elf-gcc
+# MYOR1KCC = or1k-elf-gcc
 
 share/Makefile.inc: share/Makefile.inc.in Makefile
 	$(AM_V_GEN)$(MKDIR_P) share; \
-	$(SED) -e 's,@OR1K-CC@,$(MYOR1KCC),g' -e 's,@OR1K-OBJDUMP@,$(MYOR1KOBJDUMP),g' \
+	$(SED) -e 's,@OR1K-CC@,$(CC),g' -e 's,@OR1K-OBJDUMP@,$(MYOR1KOBJDUMP),g' \
 	-e 's,@OR1K-OBJCOPY@,$(MYOR1KOBJCOPY),g' < $< > $@ || rm $@
 
 CLEANFILES += share/Makefile.inc
 
 share/create_pgas_binary.sh: share/create_pgas_binary.sh.in Makefile 
 	$(AM_V_GEN)$(MKDIR_P) share; \
-	$(SED) -e 's,@OR1K-CC@,$(MYOR1KCC),g' -e 's,@OR1K-OBJDUMP@,$(MYOR1KOBJDUMP),g' \
+	$(SED) -e 's,@OR1K-CC@,$(CC),g' -e 's,@OR1K-OBJDUMP@,$(MYOR1KOBJDUMP),g' \
 	-e 's,@OR1K-OBJCOPY@,$(MYOR1KOBJCOPY),g' < $< > $@ || rm $@
 
 CLEANFILES += share/create_pgas_binary.sh

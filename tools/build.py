@@ -613,14 +613,14 @@ def build_examples_sim(options, env):
         "options": "--NUM_CORES 1"},
 
 
-        { "name": "system_10x10_c100_sim",
-        "outname": "system_10x10_c100_sim_singlecore",
-        "path": "system_10x10_c100",
-        "artifact": [
-          "build/optimsoc_examples_system_10x10_c100_sim_0/sim-verilator/Vtb_system_10x10_c100",
-          "build/optimsoc_examples_system_10x10_c100_sim_0/bld-verilator/Vtb_system_10x10_c100",
-        ],
-        "options": "--NUM_CORES 1"},
+        # { "name": "system_10x10_c100_sim",
+        # "outname": "system_10x10_c100_sim_singlecore",
+        # "path": "system_10x10_c100",
+        # "artifact": [
+        #   "build/optimsoc_examples_system_10x10_c100_sim_0/sim-verilator/Vtb_system_10x10_c100",
+        #   "build/optimsoc_examples_system_10x10_c100_sim_0/bld-verilator/Vtb_system_10x10_c100",
+        # ],
+        # "options": "--NUM_CORES 1"},
     ]
 
     for ex in examples:

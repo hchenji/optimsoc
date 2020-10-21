@@ -3,7 +3,7 @@
 autoreconf --install --symlink
 
 libdir() {
-        echo $(cd $1/$(cc -print-multi-os-directory); pwd)
+        echo $(cd $1/$(gcc -print-multi-os-directory); pwd)
 }
 
 args="--prefix=\${OPTIMSOC_INSTALLATION}/sw --host=or1k-elf"
