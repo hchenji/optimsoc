@@ -52,7 +52,7 @@ package optimsoc_config;
       // System configuration
       integer     NUMTILES;
       integer     NUMCTS;
-      logic [63:0][15:0] CTLIST;
+      logic [127:0][15:0] CTLIST;
       integer            CORES_PER_TILE;
       integer            GMEM_SIZE;
       integer            GMEM_TILE;
@@ -97,7 +97,7 @@ package optimsoc_config;
       // System configuration
       integer            NUMTILES;
       integer            NUMCTS;
-      logic [63:0][15:0] CTLIST;
+      logic [127:0][15:0] CTLIST;
       integer            CORES_PER_TILE;
       integer            GMEM_SIZE;
       integer            GMEM_TILE;
