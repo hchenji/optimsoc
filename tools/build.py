@@ -603,6 +603,16 @@ def build_examples_sim(options, env):
       #   ],
       #   "options": "--NUM_CORES 1  --USE_DEBUG 1"},
 
+      { "name": "system_6x6_c36_sim",
+        "outname": "system_6x6_c36_sim_singlecore",
+        "path": "system_6x6_c36",
+        "artifact": [
+          "build/optimsoc_examples_system_6x6_c36_sim_0/sim-verilator/Vtb_system_6x6_c36",
+          "build/optimsoc_examples_system_6x6_c36_sim_0/bld-verilator/Vtb_system_6x6_c36",
+        ],
+        "options": "--NUM_CORES 1"},
+
+
         { "name": "system_10x10_c100_sim",
         "outname": "system_10x10_c100_sim_singlecore",
         "path": "system_10x10_c100",
