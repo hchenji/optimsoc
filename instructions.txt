@@ -1,0 +1,30 @@
+for compiling optimsoc:
+
+source ~/optimsoc/setup_prebuilt.sh
+
+make BUILD_EXAMPLES=yes BUILD_EXAMPLES_FPGA=no BUILD_DOCS=no
+
+----------------------------------
+
+for building baremetal-apps:
+
+source ~/optimsoc/setup_prebuilt.sh
+. /home/wsrg/Documents/OHIO/Junior/work/optimsoc/objdir/dist/optimsoc-environment.sh 
+
+then go the binary's source and hit make
+
+-----------------------------------
+
+
+to run a sim:
+
+$OPTIMSOC/examples/sim/system_2x2_cccc/system_2x2_cccc_sim_singlecore --meminit=hello.vmem
+
+replace system_2x2_cccc_sim_singlecore with the binary that was built. replace hello.vmem with the app's binary
+
+
+==================
+
+Part 1: extend the directories in examples/sim . folder names here should not contain _dm at the end
+
+Part 2: extend the directories in src/soc/hw/system_*_*_dm
