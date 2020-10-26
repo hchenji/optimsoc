@@ -101,6 +101,8 @@ module compute_tile_dm
    localparam SLAVE_BOOT = 3;
    localparam SLAVE_UART = 4;
 
+   localparam CLOG_OF_MEM = clog2_width(CONFIG.LMEM_SIZE);
+   
    mor1kx_trace_exec [CONFIG.CORES_PER_TILE-1:0] trace;
 
    logic        wb_mem_clk_i;
@@ -578,6 +580,8 @@ module compute_tile_dm
          /* wb_sram_sp AUTO_TEMPLATE(
           .wb_\(.*\) (wb_mem_\1),
           ); */
+
+         // $display("lmem size is %d", CONFIG.LMEM_SIZE);
          wb_sram_sp
            #(.DW(32),
              .AW(clog2_width(CONFIG.LMEM_SIZE)),
@@ -592,7 +596,7 @@ module compute_tile_dm
                .wb_rty_o                (wb_mem_rty_o),
                .wb_dat_o                (wb_mem_dat_o),
                // Inputs
-               .wb_adr_i                (wb_mem_adr_i[clog2_width(CONFIG.LMEM_SIZE)-1:0]),
+               .wb_adr_i                (wb_mem_adr_i[CLOG_OF_MEM-1:0]),
                .wb_bte_i                (wb_mem_bte_i),
                .wb_cti_i                (wb_mem_cti_i),
                .wb_cyc_i                (wb_mem_cyc_i),

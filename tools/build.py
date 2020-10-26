@@ -632,6 +632,8 @@ def build_examples_sim(options, env):
         info("  + Build")
         ensure_directory(buildobjdir)
         cmd = "fusesoc --verbose --monochrome --cores-root {} sim --build-only optimsoc:examples:{} {}".format(buildsrcdir, ex["name"], ex["options"])
+        print("buildobjdir is ", buildobjdir)
+        print(cmd)
         run_command(cmd, cwd=buildobjdir, env=env)
 
         info("  + Copy build artifacts")
@@ -641,6 +643,7 @@ def build_examples_sim(options, env):
         if not filename:
             fatal("No alternative file for build artifact for %s found." % ex["outname"])
 
+        print('filename is ', filename)
         srcf = os.path.join(buildobjdir, filename)
         destf = os.path.join(builddist, ex["outname"])
         file_copy(srcf, destf)

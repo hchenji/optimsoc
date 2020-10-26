@@ -145,6 +145,10 @@ module tb_system_3x3_c9(
          assign trace = u_system.gen_ct[t].u_ct.trace;
 
          for (i = 0; i < CONFIG.CORES_PER_TILE; i = i + 1) begin : gen_tracemon_core
+         
+         // CANT have const functions calls as parameter, so pull it out as variable
+         localparam COREID = index2string((t*CONFIG.CORES_PER_TILE)+i);
+
             r3_checker
                u_r3_checker(
                   .clk(clk),
@@ -157,8 +161,8 @@ module tb_system_3x3_c9(
 
             trace_monitor
                #(
-                  .STDOUT_FILENAME({"stdout.",index2string((t*CONFIG.CORES_PER_TILE)+i)}),
-                  .TRACEFILE_FILENAME({"trace.",index2string((t*CONFIG.CORES_PER_TILE)+i)}),
+                  .STDOUT_FILENAME({"stdout.",COREID}),
+                  .TRACEFILE_FILENAME({"trace.",COREID}),
                   .ENABLE_TRACE(0),
                   .ID((t*CONFIG.CORES_PER_TILE)+i),
                   .TERM_CROSS_NUM(CONFIG.NUMCTS*CONFIG.CORES_PER_TILE)

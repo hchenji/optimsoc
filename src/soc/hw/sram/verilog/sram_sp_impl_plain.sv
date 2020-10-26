@@ -82,7 +82,7 @@ module sram_sp_impl_plain(/*AUTOARG*/
 
    (* ram_style = "block" *) reg [DW-1:0] mem [MEM_SIZE_WORDS-1:0] /*synthesis syn_ramstyle = "block_ram" */;
 
-   always_ff @ (posedge clk) begin
+   always @ (posedge clk) begin
       if (we) begin
          // memory write
          for (int i = 0; i < SW; i = i + 1) begin

@@ -92,7 +92,7 @@ package optimsoc_functions;
          if (value == 1) begin
             clog2_width = 1;
          end else begin
-            clog2_width = clog2(value);
+            clog2_width = $clog2(value);
          end
       end
    endfunction

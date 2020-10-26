@@ -28,7 +28,7 @@ targets:
     parameters:
       - USE_DEBUG
       - NUM_CORES
-    default_tool: verilator
+    default_tool: vcs
     filesets:
       - files_rtl
       - files_sim

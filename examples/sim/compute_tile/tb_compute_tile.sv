@@ -50,12 +50,12 @@ module tb_compute_tile
    // Simulation parameters
    parameter USE_DEBUG = 0;
    parameter integer NUM_CORES = 1;
-   parameter integer LMEM_SIZE = 128*1024*1024;
+   parameter integer LMEM_SIZE = int'(128*1024*1024);
 
    localparam base_config_t
      BASE_CONFIG = '{ NUMTILES: 1,
                       NUMCTS: 1,
-                      CTLIST: {{63{16'hx}}, 16'h0},
+                      CTLIST: {{127{16'hx}}, 16'h0},
                       CORES_PER_TILE: NUM_CORES,
                       GMEM_SIZE: 0,
                       GMEM_TILE: 0,
