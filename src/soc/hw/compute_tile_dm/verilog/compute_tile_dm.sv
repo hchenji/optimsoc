@@ -53,7 +53,7 @@ module compute_tile_dm
 
     parameter DEBUG_BASEID = 'x,
 
-    parameter MEM_FILE = 'x,
+    parameter MEM_FILE = "sram.vmem",
 
     localparam CHANNELS = CONFIG.NOC_CHANNELS,
     localparam FLIT_WIDTH = CONFIG.NOC_FLIT_WIDTH
