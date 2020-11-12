@@ -45,6 +45,14 @@ targets:
           # XXX: Cleanup all warnings and remove this option
           # (or make it more fine-grained at least)
           - "-Wno-fatal"
+  synth:
+    parameters:
+      - USE_DEBUG
+      - NUM_CORES
+    default_tool: dc
+    filesets:
+      - files_rtl
+    toplevel: compute_tile
 
   lint:
     parameters:
