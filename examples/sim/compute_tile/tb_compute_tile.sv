@@ -55,7 +55,7 @@ module tb_compute_tile
    localparam base_config_t
      BASE_CONFIG = '{ NUMTILES: 1,
                       NUMCTS: 1,
-                      CTLIST: {{127{16'hx}}, 16'h0},
+                      CTLIST: {{127{16'h0}}, 16'h0},
                       CORES_PER_TILE: NUM_CORES,
                       GMEM_SIZE: 0,
                       GMEM_TILE: 0,
@@ -81,7 +81,7 @@ module tb_compute_tile
                       DEBUG_CTM: 1,
                       DEBUG_DEM_UART: 1,
                       DEBUG_SUBNET_BITS: 6,
-                      DEBUG_LOCAL_SUBNET: 0,
+                      DEBUG_LOCAL_SUBNET: 1,
                       DEBUG_ROUTER_BUFFER_SIZE: 4,
                       DEBUG_MAX_PKT_LEN: 12
                       };
@@ -169,6 +169,7 @@ module tb_compute_tile
          logic com_rst, logic_rst;
 
          // TCP communication interface (simulation only)
+         `ifndef synthesis
          glip_tcp_toplevel
            u_glip(
                   .*,
@@ -177,6 +178,7 @@ module tb_compute_tile
                   .fifo_in   (c_glip_in),
                   .fifo_out  (c_glip_out)
                   );
+         `endif
 
          // System Interface
          debug_interface
@@ -189,7 +191,7 @@ module tb_compute_tile
              .MAX_PKT_LEN (CONFIG.DEBUG_MAX_PKT_LEN),
              .DEBUG_ROUTER_BUFFER_SIZE (CONFIG.DEBUG_ROUTER_BUFFER_SIZE)
              )
-   u_debuginterface(
+                  u_debuginterface(
                     .clk           (clk),
                     .rst           (rst),
 
@@ -223,6 +225,7 @@ endgenerate
    compute_tile_dm
      #(.CONFIG(CONFIG),
        .ID(0),
+       .COREBASE(0),
        .MEM_FILE("ct.vmem"),
        .DEBUG_BASEID((CONFIG.DEBUG_LOCAL_SUBNET << (16 - CONFIG.DEBUG_SUBNET_BITS)) + 1))
    u_compute_tile(
@@ -247,15 +250,15 @@ endgenerate
                   .noc_out_ready     (noc_out_ready),
 
                   // Unused
-                  .wb_ext_adr_i (),
-                  .wb_ext_cyc_i (),
-                  .wb_ext_dat_i (),
-                  .wb_ext_sel_i (),
-                  .wb_ext_stb_i (),
-                  .wb_ext_we_i  (),
-                  .wb_ext_cab_i (),
-                  .wb_ext_cti_i (),
-                  .wb_ext_bte_i (),
+                  .wb_ext_adr_i ('0),
+                  .wb_ext_cyc_i ('0),
+                  .wb_ext_dat_i ('0),
+                  .wb_ext_sel_i ('0),
+                  .wb_ext_stb_i ('0),
+                  .wb_ext_we_i  ('0),
+                  .wb_ext_cab_i ('0),
+                  .wb_ext_cti_i ('0),
+                  .wb_ext_bte_i ('0),
                   .wb_ext_ack_o ('0),
                   .wb_ext_rty_o ('0),
                   .wb_ext_err_o ('0),
