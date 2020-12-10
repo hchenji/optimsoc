@@ -490,22 +490,22 @@ def build_examples_sim(options, env):
     # Newer fusesoc versions use bld-verilator as output directory, older ones
     # use sim-verilator. Support both by giving alternatives for the artifact.
     examples = [
-      # { "name": "compute_tile_sim",
-      #   "outname": "compute_tile_sim_singlecore",
-      #   "path": "compute_tile",
-      #   "artifact": [
-      #     "build/optimsoc_examples_compute_tile_sim_0/sim-verilator/Vtb_compute_tile",
-      #     "build/optimsoc_examples_compute_tile_sim_0/bld-verilator/Vtb_compute_tile",
-      #   ],
-      #   "options": "--NUM_CORES 1" },
-      # { "name": "compute_tile_sim",
-      #   "outname": "compute_tile_sim_singlecore_debug",
-      #   "path": "compute_tile",
-      #   "artifact": [
-      #     "build/optimsoc_examples_compute_tile_sim_0/sim-verilator/Vtb_compute_tile",
-      #     "build/optimsoc_examples_compute_tile_sim_0/bld-verilator/Vtb_compute_tile",
-      #   ],
-      #   "options": "--NUM_CORES 1 --USE_DEBUG" },
+      { "name": "compute_tile_sim",
+        "outname": "compute_tile_sim_singlecore",
+        "path": "compute_tile",
+        "artifact": [
+          "build/optimsoc_examples_compute_tile_sim_0/sim-verilator/Vtb_compute_tile",
+          "build/optimsoc_examples_compute_tile_sim_0/bld-verilator/Vtb_compute_tile",
+        ],
+        "options": "--NUM_CORES 1" },
+      { "name": "compute_tile_sim",
+        "outname": "compute_tile_sim_singlecore_debug",
+        "path": "compute_tile",
+        "artifact": [
+          "build/optimsoc_examples_compute_tile_sim_0/sim-verilator/Vtb_compute_tile",
+          "build/optimsoc_examples_compute_tile_sim_0/bld-verilator/Vtb_compute_tile",
+        ],
+        "options": "--NUM_CORES 1 --USE_DEBUG" },
       # { "name": "compute_tile_sim",
       #   "outname": "compute_tile_sim_dualcore",
       #   "path": "compute_tile",
@@ -584,14 +584,14 @@ def build_examples_sim(options, env):
       #   ],
       #   "options": "--NUM_CORES 2  --USE_DEBUG 1"},
 
-      { "name": "system_3x3_c9_sim",
-        "outname": "system_3x3_c9_sim_singlecore",
-        "path": "system_3x3_c9",
-        "artifact": [
-          "build/optimsoc_examples_system_3x3_c9_sim_0/sim-verilator/Vtb_system_3x3_c9",
-          "build/optimsoc_examples_system_3x3_c9_sim_0/bld-verilator/Vtb_system_3x3_c9",
-        ],
-        "options": "--NUM_CORES 1"},
+    #   { "name": "system_3x3_c9_sim",
+    #     "outname": "system_3x3_c9_sim_singlecore",
+    #     "path": "system_3x3_c9",
+    #     "artifact": [
+    #       "build/optimsoc_examples_system_3x3_c9_sim_0/sim-verilator/Vtb_system_3x3_c9",
+    #       "build/optimsoc_examples_system_3x3_c9_sim_0/bld-verilator/Vtb_system_3x3_c9",
+    #     ],
+    #     "options": "--NUM_CORES 1"},
 
 
       # { "name": "system_3x3_c9_sim",
@@ -603,14 +603,14 @@ def build_examples_sim(options, env):
       #   ],
       #   "options": "--NUM_CORES 1  --USE_DEBUG 1"},
 
-      { "name": "system_6x6_c36_sim",
-        "outname": "system_6x6_c36_sim_singlecore",
-        "path": "system_6x6_c36",
-        "artifact": [
-          "build/optimsoc_examples_system_6x6_c36_sim_0/sim-verilator/Vtb_system_6x6_c36",
-          "build/optimsoc_examples_system_6x6_c36_sim_0/bld-verilator/Vtb_system_6x6_c36",
-        ],
-        "options": "--NUM_CORES 1"},
+    #   { "name": "system_6x6_c36_sim",
+    #     "outname": "system_6x6_c36_sim_singlecore",
+    #     "path": "system_6x6_c36",
+    #     "artifact": [
+    #       "build/optimsoc_examples_system_6x6_c36_sim_0/sim-verilator/Vtb_system_6x6_c36",
+    #       "build/optimsoc_examples_system_6x6_c36_sim_0/bld-verilator/Vtb_system_6x6_c36",
+    #     ],
+    #     "options": "--NUM_CORES 1"},
 
 
         # { "name": "system_10x10_c100_sim",
@@ -631,7 +631,7 @@ def build_examples_sim(options, env):
 
         info("  + Build")
         ensure_directory(buildobjdir)
-        cmd = "fusesoc --verbose --monochrome --cores-root {} sim --build-only optimsoc:examples:{} {}".format(buildsrcdir, ex["name"], ex["options"])
+        cmd = "fusesoc --verbose --monochrome --cores-root {} sim --no-export --build-only optimsoc:examples:{} {}".format(buildsrcdir, ex["name"], ex["options"])
         print("buildobjdir is ", buildobjdir)
         print(cmd)
         run_command(cmd, cwd=buildobjdir, env=env)

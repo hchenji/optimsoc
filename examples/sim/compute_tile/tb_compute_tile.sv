@@ -139,7 +139,7 @@ module tb_compute_tile
            #(
              .STDOUT_FILENAME({"stdout.",index2string(i)}),
              .TRACEFILE_FILENAME({"trace.",index2string(i)}),
-             .ENABLE_TRACE(0),
+             .ENABLE_TRACE(1),
              .ID(i),
              .TERM_CROSS_NUM(NUM_CORES)
              )

@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # actually, run this in any folder and fusesoc will create a "build" directory
-# cd /Lhome/harsha/codebox/optimsoc/objdir/examples/sim/system_3x3_c9
+# cd /home/cjh/codebox/optimsoc/objdir/examples/sim/compute_tile
 
-export OPTIMSOC="/Lhome/harsha/codebox/optimsoc/objdir/dist"
-export OPTIMSOC_RTL="/Lhome/harsha/codebox/optimsoc/objdir/dist/soc/hw"
-export LISNOC="/Lhome/harsha/codebox/optimsoc/objdir/dist/external/lisnoc"
-export LISNOC_RTL="/Lhome/harsha/codebox/optimsoc/objdir/dist/external/lisnoc/rtl"
-export FUSESOC_CORES="/Lhome/harsha/codebox/optimsoc/objdir/dist/soc/hw:/Lhome/harsha/codebox/optimsoc/objdir/dist/external/lisnoc:/Lhome/harsha/codebox/optimsoc/objdir/dist/external/opensocdebug/hardware:/Lhome/harsha/codebox/optimsoc/objdir/dist/external/mor1kx:/Lhome/harsha/codebox/optimsoc/objdir/dist/external/glip"
+export OPTIMSOC="/home/cjh/codebox/optimsoc"
+export OPTIMSOC_RTL="/home/cjh/codebox/optimsoc/src/soc/hw"
+export LISNOC="/home/cjh/codebox/optimsoc/external/lisnoc"
+export LISNOC_RTL="/home/cjh/codebox/optimsoc/external/lisnoc/rtl"
+export FUSESOC_CORES="/home/cjh/codebox/optimsoc/src/soc/hw:/home/cjh/codebox/optimsoc/external/lisnoc:/home/cjh/codebox/optimsoc/external/opensocdebug/hardware:/home/cjh/codebox/optimsoc/external/mor1kx:/home/cjh/codebox/optimsoc/external/glip"
 
-fusesoc --verbose --monochrome --cores-root /Lhome/harsha/codebox/optimsoc/examples/sim/system_3x3_c9 sim --build-only optimsoc:examples:system_3x3_c9_sim --NUM_CORES 1
+fusesoc --verbose --monochrome --cores-root /home/cjh/codebox/optimsoc/examples/sim/compute_tile sim --no-export --sim vcs --build-only optimsoc:examples:compute_tile_sim --NUM_CORES 1
