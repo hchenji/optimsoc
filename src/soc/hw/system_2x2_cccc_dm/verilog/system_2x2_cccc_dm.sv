@@ -29,8 +29,10 @@
 module system_2x2_cccc_dm(
    input clk, rst,
 
+`ifndef SYNTHESIS
    glip_channel c_glip_in,
    glip_channel c_glip_out,
+`endif
 
    output [4*32-1:0] wb_ext_adr_i,
    output [4*1-1:0]  wb_ext_cyc_i,
@@ -50,7 +52,48 @@ module system_2x2_cccc_dm(
    import dii_package::dii_flit;
    import optimsoc_config::*;
 
-   parameter config_t CONFIG = 'x;
+   parameter config_t CONFIG = '{NUMTILES:4,
+                                 NUMCTS:4,
+                                 CTLIST: {{124{16'hx}}, 16'h0, 16'h1, 16'h2, 16'h3},
+                                 CORES_PER_TILE:1,
+                                 GMEM_SIZE:0,
+                                 GMEM_TILE:'x,
+                                 TOTAL_NUM_CORES:4,
+                                 NOC_ENABLE_VCHANNELS:'h1,
+                                 NOC_FLIT_WIDTH:32,
+                                 NOC_CHANNELS:2,
+                                 LMEM_SIZE:1048576,
+                                 LMEM_STYLE:PLAIN,
+                                 ENABLE_BOOTROM:'h0,
+                                 BOOTROM_SIZE:0,
+                                 ENABLE_DM:'h0,
+                                 DM_BASE:0,
+                                 DM_SIZE:1048576,
+                                 ENABLE_PGAS:'h0,
+                                 DM_RANGE_WIDTH:12,
+                                 DM_RANGE_MATCH:0,
+                                 PGAS_BASE:0,
+                                 PGAS_SIZE:0,
+                                 PGAS_RANGE_WIDTH:1,
+                                 PGAS_RANGE_MATCH:0,
+                                 CORE_ENABLE_FPU:'h0,
+                                 CORE_ENABLE_PERFCOUNTERS:'h0,
+                                 NA_ENABLE_MPSIMPLE:'h1,
+                                 NA_ENABLE_DMA:'h1,
+                                 NA_DMA_GENIRQ:'h1,
+                                 NA_DMA_ENTRIES:4,
+                                 USE_DEBUG:'h0,
+                                 DEBUG_STM:'h1,
+                                 DEBUG_CTM:'h1,
+                                 DEBUG_DEM_UART:'h0,
+                                 DEBUG_SUBNET_BITS:6,
+                                 DEBUG_LOCAL_SUBNET:0,
+                                 DEBUG_ROUTER_BUFFER_SIZE:4,
+                                 DEBUG_MAX_PKT_LEN:12,
+                                 DEBUG_MODS_PER_CORE:0,
+                                 DEBUG_MODS_PER_TILE:0,
+                                 DEBUG_NUM_MODS:0
+                                 };
 
    dii_flit [1:0] debug_ring_in [0:3];
    dii_flit [1:0] debug_ring_out [0:3];
@@ -59,6 +102,7 @@ module system_2x2_cccc_dm(
 
    logic       rst_sys, rst_cpu;
 
+`ifndef SYNTHESIS
    debug_interface
       #(
          .SYSTEM_VENDOR_ID (2),
@@ -90,6 +134,7 @@ module system_2x2_cccc_dm(
    assign debug_ring_out_ready[1] = debug_ring_in_ready[3];
    assign debug_ring_in[2] = debug_ring_out[3];
    assign debug_ring_out_ready[3] = debug_ring_in_ready[2];
+`endif
 
    localparam FLIT_WIDTH = CONFIG.NOC_FLIT_WIDTH;
    localparam CHANNELS = CONFIG.NOC_CHANNELS;

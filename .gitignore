@@ -21,3 +21,9 @@
 
 # compiled python
 *.pyc
+
+prebuilt
+standalone
+csrc
+simv.daidir
+
