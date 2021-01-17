@@ -250,19 +250,19 @@ endgenerate
                   .noc_out_ready     (noc_out_ready),
 
                   // Unused
-                  .wb_ext_adr_i ('0),
-                  .wb_ext_cyc_i ('0),
-                  .wb_ext_dat_i ('0),
-                  .wb_ext_sel_i ('0),
-                  .wb_ext_stb_i ('0),
-                  .wb_ext_we_i  ('0),
-                  .wb_ext_cab_i ('0),
-                  .wb_ext_cti_i ('0),
-                  .wb_ext_bte_i ('0),
-                  .wb_ext_ack_o ('0),
-                  .wb_ext_rty_o ('0),
-                  .wb_ext_err_o ('0),
-                  .wb_ext_dat_o ('0)
+                  .wb_ext_adr_i (),
+                  .wb_ext_cyc_i (),
+                  .wb_ext_dat_i (),
+                  .wb_ext_sel_i (),
+                  .wb_ext_stb_i (),
+                  .wb_ext_we_i  (),
+                  .wb_ext_cab_i (),
+                  .wb_ext_cti_i (),
+                  .wb_ext_bte_i (),
+                  .wb_ext_ack_o (),
+                  .wb_ext_rty_o (),
+                  .wb_ext_err_o (),
+                  .wb_ext_dat_o ()
                   );
 
    // Generate testbench signals.

@@ -498,14 +498,14 @@ def build_examples_sim(options, env):
           "build/optimsoc_examples_compute_tile_sim_0/bld-verilator/Vtb_compute_tile",
         ],
         "options": "--NUM_CORES 1" },
-      { "name": "compute_tile_sim",
-        "outname": "compute_tile_sim_singlecore_debug",
-        "path": "compute_tile",
-        "artifact": [
-          "build/optimsoc_examples_compute_tile_sim_0/sim-verilator/Vtb_compute_tile",
-          "build/optimsoc_examples_compute_tile_sim_0/bld-verilator/Vtb_compute_tile",
-        ],
-        "options": "--NUM_CORES 1 --USE_DEBUG" },
+    #   { "name": "compute_tile_sim",
+    #     "outname": "compute_tile_sim_singlecore_debug",
+    #     "path": "compute_tile",
+    #     "artifact": [
+    #       "build/optimsoc_examples_compute_tile_sim_0/sim-verilator/Vtb_compute_tile",
+    #       "build/optimsoc_examples_compute_tile_sim_0/bld-verilator/Vtb_compute_tile",
+    #     ],
+    #     "options": "--NUM_CORES 1 --USE_DEBUG" },
       # { "name": "compute_tile_sim",
       #   "outname": "compute_tile_sim_dualcore",
       #   "path": "compute_tile",
@@ -531,14 +531,14 @@ def build_examples_sim(options, env):
       #   ],
       #   "options": "--NUM_CORES 4 --USE_DEBUG" },
 
-      # { "name": "system_2x2_cccc_sim",
-      #   "outname": "system_2x2_cccc_sim_singlecore",
-      #   "path": "system_2x2_cccc",
-      #   "artifact": [
-      #     "build/optimsoc_examples_system_2x2_cccc_sim_0/sim-verilator/Vtb_system_2x2_cccc",
-      #     "build/optimsoc_examples_system_2x2_cccc_sim_0/bld-verilator/Vtb_system_2x2_cccc",
-      #   ],
-      #   "options": "--NUM_CORES 1"},
+      { "name": "system_2x2_cccc_sim",
+        "outname": "system_2x2_cccc_sim_singlecore",
+        "path": "system_2x2_cccc",
+        "artifact": [
+          "build/optimsoc_examples_system_2x2_cccc_sim_0/sim-verilator/Vtb_system_2x2_cccc",
+          "build/optimsoc_examples_system_2x2_cccc_sim_0/bld-verilator/Vtb_system_2x2_cccc",
+        ],
+        "options": "--NUM_CORES 1"},
       # { "name": "system_2x2_cccc_sim",
       #   "outname": "system_2x2_cccc_sim_singlecore_debug",
       #   "path": "system_2x2_cccc",
@@ -584,14 +584,14 @@ def build_examples_sim(options, env):
       #   ],
       #   "options": "--NUM_CORES 2  --USE_DEBUG 1"},
 
-    #   { "name": "system_3x3_c9_sim",
-    #     "outname": "system_3x3_c9_sim_singlecore",
-    #     "path": "system_3x3_c9",
-    #     "artifact": [
-    #       "build/optimsoc_examples_system_3x3_c9_sim_0/sim-verilator/Vtb_system_3x3_c9",
-    #       "build/optimsoc_examples_system_3x3_c9_sim_0/bld-verilator/Vtb_system_3x3_c9",
-    #     ],
-    #     "options": "--NUM_CORES 1"},
+      { "name": "system_3x3_c9_sim",
+        "outname": "system_3x3_c9_sim_singlecore",
+        "path": "system_3x3_c9",
+        "artifact": [
+          "build/optimsoc_examples_system_3x3_c9_sim_0/sim-verilator/Vtb_system_3x3_c9",
+          "build/optimsoc_examples_system_3x3_c9_sim_0/bld-verilator/Vtb_system_3x3_c9",
+        ],
+        "options": "--NUM_CORES 1"},
 
 
       # { "name": "system_3x3_c9_sim",

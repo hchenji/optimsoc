@@ -241,9 +241,11 @@ function automatic integer clog2;
    parameter integer LMEM_SIZE = 1024*1024;
 
    localparam base_config_t
- BASE_CONFIG = '{ NUMTILES: 4,
-                      NUMCTS: 4,
-                      CTLIST: {{124{16'hx}}, 16'h0, 16'h1, 16'h2, 16'h3},
+     BASE_CONFIG = '{ NUMTILES: 100,
+                      NUMCTS: 100,	// TODO: what is CTS??
+                      // CTLIST is a 128 long array of 16 bit entries, defined in util/config.
+                      //   so for 100 cores, top 28 are undefined, lower 100 are the IDs.
+                      CTLIST: {{28{16'hx}}, 16'd0,16'd1,16'd2,16'd3,16'd4,16'd5,16'd6,16'd7,16'd8,16'd9,16'd10,16'd11,16'd12,16'd13,16'd14,16'd15,16'd16,16'd17,16'd18,16'd19,16'd20,16'd21,16'd22,16'd23,16'd24,16'd25,16'd26,16'd27,16'd28,16'd29,16'd30,16'd31,16'd32,16'd33,16'd34,16'd35,16'd36,16'd37,16'd38,16'd39,16'd40,16'd41,16'd42,16'd43,16'd44,16'd45,16'd46,16'd47,16'd48,16'd49,16'd50,16'd51,16'd52,16'd53,16'd54,16'd55,16'd56,16'd57,16'd58,16'd59,16'd60,16'd61,16'd62,16'd63,16'd64,16'd65,16'd66,16'd67,16'd68,16'd69,16'd70,16'd71,16'd72,16'd73,16'd74,16'd75,16'd76,16'd77,16'd78,16'd79,16'd80,16'd81,16'd82,16'd83,16'd84,16'd85,16'd86,16'd87,16'd88,16'd89,16'd90,16'd91,16'd92,16'd93,16'd94,16'd95,16'd96,16'd97,16'd98,16'd99},
                       CORES_PER_TILE: NUM_CORES,
                       GMEM_SIZE: 0,
                       GMEM_TILE: 'x,
@@ -273,7 +275,7 @@ function automatic integer clog2;
                       DEBUG_ROUTER_BUFFER_SIZE: 4,
                       DEBUG_MAX_PKT_LEN: 12
                       };
-
+                      
    localparam config_t CONFIG = derive_config(BASE_CONFIG);
 
    initial begin

@@ -30,8 +30,10 @@
 module system_3x3_c9_dm(
    input clk, rst,
 
+`ifndef SYNTHESIS
    glip_channel c_glip_in,
    glip_channel c_glip_out,
+`endif
 
    output [9*32-1:0] wb_ext_adr_i,
    output [9*1-1:0]  wb_ext_cyc_i,
@@ -51,7 +53,47 @@ module system_3x3_c9_dm(
    import dii_package::dii_flit;
    import optimsoc_config::*;
 
-   parameter config_t CONFIG = 'x;
+   parameter config_t CONFIG = '{NUMTILES:9,
+                                 NUMCTS:9,
+                                 CTLIST: {{119{16'hx}}, 16'h0, 16'h1, 16'h2, 16'h3, 16'h4, 16'h5, 16'h6, 16'h7, 16'h8},
+                                 CORES_PER_TILE:1,
+                                 GMEM_SIZE:0,
+                                 GMEM_TILE:'x,
+                                 TOTAL_NUM_CORES:9,
+                                 NOC_ENABLE_VCHANNELS:'h1,
+                                 NOC_FLIT_WIDTH:32,
+                                 NOC_CHANNELS:2,
+                                 LMEM_SIZE:1048576,
+                                 LMEM_STYLE:PLAIN,
+                                 ENABLE_BOOTROM:'h0,
+                                 BOOTROM_SIZE:0,
+                                 ENABLE_DM:'h0,
+                                 DM_BASE:0,
+                                 DM_SIZE:1048576,
+                                 ENABLE_PGAS:'h0,
+                                 DM_RANGE_WIDTH:12,
+                                 DM_RANGE_MATCH:0,
+                                 PGAS_BASE:0,
+                                 PGAS_SIZE:0,
+                                 PGAS_RANGE_WIDTH:1,
+                                 PGAS_RANGE_MATCH:0,
+                                 CORE_ENABLE_FPU:'h0,
+                                 CORE_ENABLE_PERFCOUNTERS:'h0,
+                                 NA_ENABLE_MPSIMPLE:'h1,
+                                 NA_ENABLE_DMA:'h1,
+                                 NA_DMA_GENIRQ:'h1,
+                                 NA_DMA_ENTRIES:4,
+                                 USE_DEBUG:'h0,
+                                 DEBUG_STM:'h1,
+                                 DEBUG_CTM:'h1,
+                                 DEBUG_DEM_UART:'h0,
+                                 DEBUG_SUBNET_BITS:6,
+                                 DEBUG_LOCAL_SUBNET:0,
+                                 DEBUG_ROUTER_BUFFER_SIZE:4,
+                                 DEBUG_MAX_PKT_LEN:12,
+                                 DEBUG_MODS_PER_CORE:0,
+                                 DEBUG_MODS_PER_TILE:0,
+                                 DEBUG_NUM_MODS:0};
 
    dii_flit [1:0] debug_ring_in [0:8];
    dii_flit [1:0] debug_ring_out [0:8];
@@ -59,6 +101,8 @@ module system_3x3_c9_dm(
    logic [1:0] debug_ring_out_ready [0:8];
 
    logic       rst_sys, rst_cpu;
+
+`ifndef SYNTHESIS
 
    debug_interface
       #(
@@ -115,6 +159,7 @@ module system_3x3_c9_dm(
    // debug interface's rin_rdy, an output needs to be input to first unit's rout_rdy
    // these are already done aboe in the module decl.  
    
+   `endif
    
    localparam FLIT_WIDTH = CONFIG.NOC_FLIT_WIDTH;
    localparam CHANNELS = CONFIG.NOC_CHANNELS;

@@ -30,8 +30,10 @@
 module system_10x10_c100_dm(
    input clk, rst,
 
+`ifndef SYNTHESIS
    glip_channel c_glip_in,
    glip_channel c_glip_out,
+`endif
 
    output [100*32-1:0] wb_ext_adr_i,
    output [100*1-1:0]  wb_ext_cyc_i,
@@ -51,7 +53,47 @@ module system_10x10_c100_dm(
    import dii_package::dii_flit;
    import optimsoc_config::*;
 
-   parameter config_t CONFIG = 'x;
+   parameter config_t CONFIG = '{NUMTILES:100,
+                                 NUMCTS:100,
+                                 CTLIST: {{28{16'hx}}, 16'd0,16'd1,16'd2,16'd3,16'd4,16'd5,16'd6,16'd7,16'd8,16'd9,16'd10,16'd11,16'd12,16'd13,16'd14,16'd15,16'd16,16'd17,16'd18,16'd19,16'd20,16'd21,16'd22,16'd23,16'd24,16'd25,16'd26,16'd27,16'd28,16'd29,16'd30,16'd31,16'd32,16'd33,16'd34,16'd35,16'd36,16'd37,16'd38,16'd39,16'd40,16'd41,16'd42,16'd43,16'd44,16'd45,16'd46,16'd47,16'd48,16'd49,16'd50,16'd51,16'd52,16'd53,16'd54,16'd55,16'd56,16'd57,16'd58,16'd59,16'd60,16'd61,16'd62,16'd63,16'd64,16'd65,16'd66,16'd67,16'd68,16'd69,16'd70,16'd71,16'd72,16'd73,16'd74,16'd75,16'd76,16'd77,16'd78,16'd79,16'd80,16'd81,16'd82,16'd83,16'd84,16'd85,16'd86,16'd87,16'd88,16'd89,16'd90,16'd91,16'd92,16'd93,16'd94,16'd95,16'd96,16'd97,16'd98,16'd99},
+                                 CORES_PER_TILE:1,
+                                 GMEM_SIZE:0,
+                                 GMEM_TILE:'x,
+                                 TOTAL_NUM_CORES:100,
+                                 NOC_ENABLE_VCHANNELS:'h1,
+                                 NOC_FLIT_WIDTH:32,
+                                 NOC_CHANNELS:2,
+                                 LMEM_SIZE:1048576,
+                                 LMEM_STYLE:PLAIN,
+                                 ENABLE_BOOTROM:'h0,
+                                 BOOTROM_SIZE:0,
+                                 ENABLE_DM:'h0,
+                                 DM_BASE:0,
+                                 DM_SIZE:1048576,
+                                 ENABLE_PGAS:'h0,
+                                 DM_RANGE_WIDTH:12,
+                                 DM_RANGE_MATCH:0,
+                                 PGAS_BASE:0,
+                                 PGAS_SIZE:0,
+                                 PGAS_RANGE_WIDTH:1,
+                                 PGAS_RANGE_MATCH:0,
+                                 CORE_ENABLE_FPU:'h0,
+                                 CORE_ENABLE_PERFCOUNTERS:'h0,
+                                 NA_ENABLE_MPSIMPLE:'h1,
+                                 NA_ENABLE_DMA:'h1,
+                                 NA_DMA_GENIRQ:'h1,
+                                 NA_DMA_ENTRIES:4,
+                                 USE_DEBUG:'h0,
+                                 DEBUG_STM:'h1,
+                                 DEBUG_CTM:'h1,
+                                 DEBUG_DEM_UART:'h0,
+                                 DEBUG_SUBNET_BITS:6,
+                                 DEBUG_LOCAL_SUBNET:0,
+                                 DEBUG_ROUTER_BUFFER_SIZE:4,
+                                 DEBUG_MAX_PKT_LEN:12,
+                                 DEBUG_MODS_PER_CORE:0,
+                                 DEBUG_MODS_PER_TILE:0,
+                                 DEBUG_NUM_MODS:0};
 
    dii_flit [1:0] debug_ring_in [0:99];
    dii_flit [1:0] debug_ring_out [0:99];
@@ -59,7 +101,7 @@ module system_10x10_c100_dm(
    logic [1:0] debug_ring_out_ready [0:99];
 
    logic       rst_sys, rst_cpu;
-
+`ifndef SYNTHESIS
    debug_interface
       #(
          .SYSTEM_VENDOR_ID (2),
@@ -112,6 +154,7 @@ module system_10x10_c100_dm(
    // debug interface's rin_rdy, an output needs to be input to first unit's rout_rdy
    // these are already done aboe in the module decl.  
    
+   `endif
    
    localparam FLIT_WIDTH = CONFIG.NOC_FLIT_WIDTH;
    localparam CHANNELS = CONFIG.NOC_CHANNELS;
@@ -142,6 +185,10 @@ module system_10x10_c100_dm(
       .out_valid (link_in_valid),
       .out_ready (link_in_ready)
       );
+
+`ifdef SYNTHESIS
+   genvar i;
+`endif
 
    generate
       for (i=0; i<100; i=i+1) begin : gen_ct
