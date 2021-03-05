@@ -631,7 +631,7 @@ def build_examples_sim(options, env):
 
         info("  + Build")
         ensure_directory(buildobjdir)
-        cmd = "fusesoc --verbose --monochrome --cores-root {} sim --no-export --build-only optimsoc:examples:{} {}".format(buildsrcdir, ex["name"], ex["options"])
+        cmd = "fusesoc --verbose --monochrome --cores-root {} run --build --target sim --no-export optimsoc:examples:{} {}".format(buildsrcdir, ex["name"], ex["options"])
         print("buildobjdir is ", buildobjdir)
         print(cmd)
         run_command(cmd, cwd=buildobjdir, env=env)
